@@ -3,21 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Facts about Climate Change</title>
+    <title>Fun Facts about Climate & Environment</title>
+    <style>
+        :root {
+            --bg-start: #0b3d91;
+            --bg-mid: #005f73;
+            --bg-end: #88c0d0;
+            --card: rgba(255, 255, 255, 0.92);
+            --shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+            --accent: #ffdd57;
+            --text: #0b1e38;
+            --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--sans);
+            background: radial-gradient(circle at 30% 15%, rgba(255, 221, 87, 0.25), transparent 50%),
+                        linear-gradient(140deg, var(--bg-start), var(--bg-mid) 55%, var(--bg-end));
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .page {
+            max-width: 840px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 22px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.32);
+        }
+
+        h1 {
+            margin: 0 0 0.75rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: 0.02em;
+        }
+
+        p {
+            margin: 0 0 1.7rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .fact-area {
+            margin-top: 1.5rem;
+            padding: 1.7rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.7);
+            min-height: 140px;
+            display: grid;
+            place-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            line-height: 1.45;
+        }
+
+        .fact-area span {
+            display: block;
+            max-width: 670px;
+        }
+
+        .actions {
+            margin-top: 1.8rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .action-btn {
+            padding: 0.9rem 1.4rem;
+            border-radius: 999px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 160ms ease, box-shadow 160ms ease;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(90deg, rgba(255, 221, 87, 0.95), rgba(255, 140, 0, 0.95));
+            color: var(--text);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .links {
+            margin-top: 1.8rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .link {
+            color: rgba(0, 151, 167, 0.95);
+            font-weight: 700;
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 151, 167, 0.25);
+            background: rgba(0, 151, 167, 0.08);
+            transition: background 150ms ease;
+        }
+
+        .link:hover {
+            background: rgba(0, 151, 167, 0.15);
+        }
+
+        .small {
+            font-size: 0.9rem;
+            color: rgba(7, 41, 77, 0.7);
+            margin-top: 1.1rem;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.8rem;
+            }
+
+            .fact-area {
+                font-size: 1rem;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Fun Facts about Climate Change</h1>
-    <ul>
-        <li>The Earth’s average temperature has risen about 1.2 degrees Celsius since the late 19th century.</li>
-        <li>Over 1 million species are at risk of extinction due to climate change, habitat loss, and other human impacts.</li>
-        <li>Sea levels are rising at an alarming rate due to melting ice caps and glaciers, affecting coastal communities worldwide.</li>
-        <li>A single tree can absorb approximately 48 pounds of carbon dioxide per year, helping to reduce greenhouse gases.</li>
-        <li>The Arctic is warming twice as fast as the rest of the planet, affecting global weather patterns.</li>
-        <li>Renewable energy sources, like wind and solar, have become more affordable and are essential to combating climate change.</li>
-        <li>Climate change can increase the intensity and frequency of extreme weather events, such as hurricanes and heatwaves.</li>
-        <li>The transportation sector is one of the largest sources of greenhouse gas emissions worldwide.</li>
-        <li>Food production is responsible for about 25% of global greenhouse gas emissions, highlighting the importance of sustainable agriculture.</li>
-        <li>Small actions, like reducing waste and conserving energy, can collectively make a significant impact on the environment.</li>
-    </ul>
+    <section class="page">
+        <div class="card">
+            <h1>Fun Climate Facts</h1>
+            <p>Tap the button to cycle through short facts about climate, energy, and how we can be part of the solution. No animal or human drawings — just clear and curious insights.</p>
+
+            <div class="fact-area" id="factArea" aria-live="polite">
+                <span id="factText">Press the button to see a fun fact!</span>
+            </div>
+
+            <div class="actions">
+                <button class="action-btn" id="newFact">Show a new fact</button>
+                <button class="action-btn" id="shuffleFacts">Shuffle all facts</button>
+            </div>
+
+            <div class="links">
+                <a class="link" href="index.html">← Back to start</a>
+                <a class="link" href="#more">More curiosities ↓</a>
+            </div>
+
+            <div class="small" id="more">
+                <p><strong>Quick tip:</strong> Saving energy is easy. Turning off lights, choosing efficient appliances, and reusing items helps reduce your carbon footprint.</p>
+                <p>The facts here are designed to be fun, shareable, and to remind you that small choices add up.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const facts = [
+            "The Earth’s average temperature has risen about 1.2°C since the late 1800s — and each tenth of a degree matters.",
+            "One mature tree can absorb about 48 pounds (22 kg) of CO₂ per year — that's roughly the same as a car driving 120 miles.",
+            "Wind turbines can generate energy even at night, and modern farms can power hundreds of homes.",
+            "Recycling one aluminum can save enough energy to run a TV for about three hours.",
+            "Around 40% of all food produced globally is wasted, and reducing waste can cut greenhouse gases dramatically.",
+            "The sun provides more energy in an hour than the world uses in a year — over 99.9% of the energy we use comes from Earth itself.",
+            "Cities can be several degrees warmer than nearby rural areas — a phenomenon known as the \"urban heat island\" effect.",
+            "If everyone in the world switched to LED bulbs, we could save more than 120 million tons of CO₂ each year.",
+            "Electric vehicles can reduce emissions by up to 70% compared to gasoline cars, depending on how the electricity is generated.",
+            "Planting native plants can reduce watering needs and support healthier local ecosystems.",
+            "The global average sea level has risen about 8-9 inches since 1880, which affects coastal homes and infrastructure.",
+            "Composting kitchen scraps can cut methane emissions from landfills and create nutrient-rich soil.",
+            "Switching your computer to sleep mode when not in use can save a noticeable amount of energy over time.",
+            "Smart thermostats can reduce heating and cooling energy use by 10-12%.",
+            "A single megawatt-hour of wind power can power about 330 average homes for one hour.",
+        ];
+
+        const factText = document.getElementById('factText');
+        const newFactBtn = document.getElementById('newFact');
+        const shuffleBtn = document.getElementById('shuffleFacts');
+
+        function pickFact() {
+            const index = Math.floor(Math.random() * facts.length);
+            return facts[index];
+        }
+
+        function showFact(text) {
+            factText.textContent = text;
+        }
+
+        function animateFact() {
+            factText.style.opacity = '0';
+            setTimeout(() => {
+                factText.style.opacity = '1';
+            }, 150);
+        }
+
+        newFactBtn.addEventListener('click', () => {
+            showFact(pickFact());
+            animateFact();
+        });
+
+        shuffleBtn.addEventListener('click', () => {
+            const shuffled = [...facts].sort(() => Math.random() - 0.5);
+            const next = shuffled[0];
+            showFact(next);
+            animateFact();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showFact(pickFact());
+        });
+    </script>
 </body>
 </html>
